@@ -260,12 +260,6 @@ public class ApptTest {
 		 assertNotEquals(null,appt.toString());
 
 	}
-
-	@Test
-	public void test09() throws Throwable {
-
-
-	}
 		 
 //add more unit tests as you needed
 	
