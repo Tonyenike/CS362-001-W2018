@@ -247,8 +247,6 @@ public class ApptTest {
 		          title,
 		         description);
 		 // assertions
-		 // IF the appointment is invalid (which it is), then it should return null.
-		 assertEquals(null, appt.toString());
 
 		 //Now the string should NOT be null, since the appt is now valid.
 		 appt.setStartHour(21);
@@ -258,6 +256,10 @@ public class ApptTest {
 		//Checking for more branch coverage for when hour < 12
 		 appt.setStartHour(9);
 		 assertNotEquals(null,appt.toString());
+
+		 // IF the appointment is invalid (which it is), then it should return null.
+		appt.setStartHour(25); 
+		assertEquals(null, appt.toString());
 
 	}
 		 

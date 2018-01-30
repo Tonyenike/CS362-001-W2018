@@ -113,6 +113,13 @@ public class TimeTableTest {
 		          title,
 		         description);
 
+
+		int [] doy = new int[2];
+		doy[0] = 5;
+		doy[1] = 6;
+
+		trapple.setRecurrence(doy, 1, 1, 1);
+
 		LinkedList<Appt> huh = new LinkedList<Appt>();
 		huh.add(trapple);
 		timetable.getApptRange(huh, yesterday, today);
@@ -214,7 +221,7 @@ public class TimeTableTest {
 	@Test
 	public void test05() throws Throwable {
 		GregorianCalendar today = new GregorianCalendar(2018, 1, 2);
-		GregorianCalendar yesterday = new GregorianCalendar(2018, 1, 1);
+		GregorianCalendar yesterday = new GregorianCalendar(2010, 1, 1);
 		GregorianCalendar wayday = new GregorianCalendar(2020, 1, 1);
 		
 		CalDay aDay = new CalDay(today);
@@ -293,7 +300,7 @@ public class TimeTableTest {
 		 
 		 startHour=1;
 		 startMinute=43;
-		 startDay=1;
+		 startDay=12;
 		 startMonth=02;
 		 startYear=2018;
 		 title="Birthday Pat";
@@ -312,7 +319,7 @@ public class TimeTableTest {
 		recurDays[1] = 2;
 		recurDays[2] = 3;
 
-		int recurNumber = 2;
+		int recurNumber = 1;
 		int recurBy = 6;
 		int recurIncrement = 3;
 
@@ -373,26 +380,73 @@ public class TimeTableTest {
 		
 	
 	
-			
+		LinkedList<Appt> thingy = new LinkedList<Appt>();
+		thingy.add(appt);
+		thingy.add(crappt);
+		thingy.add(crapple);
+		thingy.add(lappt);
+		thingy.add(mappt);
+		thingy.add(trappt);
 
-		aDay.addAppt(appt);
 		aDay.addAppt(crappt);
-		aDay.addAppt(crapple);
-		aDay.addAppt(lappt);
-		aDay.addAppt(mappt);
-		aDay.addAppt(trappt);		
 
 		TimeTable timetable = new TimeTable();
-		timetable.getApptRange(aDay.getAppts(), yesterday, today);
+		timetable.getApptRange(thingy, yesterday, today);
+		timetable.getApptRange(thingy, yesterday, wayday);
+		timetable.getApptRange(aDay.getAppts(), yesterday, wayday);
+
+	}
+	@Test
+	public void test06() throws Throwable {
+		GregorianCalendar today = new GregorianCalendar(2018, 1, 2);
+		GregorianCalendar yesterday = new GregorianCalendar(2010, 1, 1);
+		GregorianCalendar wayday = new GregorianCalendar(2020, 1, 1);
+		
+		CalDay aDay = new CalDay(today);
+
+		int startMonth = 2;
+		int startYear = 2018;
+		int startDay = 5;
+		int startHour = 5;
+		int startMinute = 45;
+		String title = "Something Else";
+		String description = "Have to read the newspaper.";
+		//Construct another appointment.
+		Appt crappt = new Appt(startHour,
+		          startMinute ,
+		          startDay ,
+		          startMonth ,
+		          startYear ,
+		          title,
+		         description);
+		
+		int [] recurDays = new int[3];
+		recurDays[0] = 1;
+		recurDays[1] = 2;
+		recurDays[2] = 3;
+
+		int recurNumber = 1;
+		int recurBy = 6;
+		int recurIncrement = 3;
+
+		crappt.setRecurrence(recurDays, recurBy, recurIncrement, recurNumber);
+		
+
+
+		aDay.addAppt(crappt);
+
+		TimeTable timetable = new TimeTable();
 		timetable.getApptRange(aDay.getAppts(), yesterday, wayday);
 
 
+
 	}
+
 	// Using the permute function
 
 
 	@Test
-	public void test06() throws Throwable {
+	public void test07() throws Throwable {
 		GregorianCalendar today = new GregorianCalendar(2018, 1, 2);
 		GregorianCalendar yesterday = new GregorianCalendar(2018, 1, 1);
 		
@@ -457,7 +511,7 @@ public class TimeTableTest {
 	// Test the permute function where the number of elements is incorrect.
 	
 	@Test(expected=IllegalArgumentException.class)
-	public void test07() throws Throwable {
+	public void test08() throws Throwable {
 		GregorianCalendar today = new GregorianCalendar(2018, 1, 2);
 		GregorianCalendar yesterday = new GregorianCalendar(2018, 1, 1);
 		
@@ -513,8 +567,9 @@ public class TimeTableTest {
 		bruh[0] = 2;
 		bruh[1] = 1;
 		bruh[2] = 0;
-		bruh[3] = 3;
+		bruh[3] = 4;
 		timetable.permute(aDay.getAppts(), bruh);
 	}
+
 //add more unit tests as you needed
 }
