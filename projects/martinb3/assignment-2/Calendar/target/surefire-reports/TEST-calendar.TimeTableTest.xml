@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="calendar.TimeTableTest" time="0.069" errors="0" skipped="0">
+<testsuite tests="8" failures="0" name="calendar.TimeTableTest" time="0.086" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.161-0.b14.el7_4.x86_64/jre/lib/amd64"/>
@@ -63,8 +63,8 @@
   <testcase classname="calendar.TimeTableTest" name="test02" time="0"/>
   <testcase classname="calendar.TimeTableTest" name="test03" time="0"/>
   <testcase classname="calendar.TimeTableTest" name="test04" time="0"/>
-  <testcase classname="calendar.TimeTableTest" name="test05" time="0.059"/>
-  <testcase classname="calendar.TimeTableTest" name="test06" time="0.006"/>
+  <testcase classname="calendar.TimeTableTest" name="test05" time="0.071"/>
+  <testcase classname="calendar.TimeTableTest" name="test06" time="0.009"/>
   <testcase classname="calendar.TimeTableTest" name="test07" time="0"/>
-  <testcase classname="calendar.TimeTableTest" name="test08" time="0.001"/>
+  <testcase classname="calendar.TimeTableTest" name="test08" time="0"/>
 </testsuite>
