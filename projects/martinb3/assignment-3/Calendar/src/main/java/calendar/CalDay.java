@@ -171,7 +171,7 @@ public class CalDay {
 	
 		if (isValid()) {
 			String todayDate = (getMonth()) + "/" + getDay() + "/" + getYear();
-			sb.append("\t --- " + todayDate + " --- \n");
+			sb.append("\t--- " + todayDate + " --- \n");
 			sb.append(" --- -------- Appointments ------------ --- \n");
 			Iterator<Appt> itr = this.appts.iterator();
 		    while(itr.hasNext()) {

@@ -373,7 +373,7 @@ public class TimeTableTest {
 		something[0] = 6;
 		something[1] = 5;
 		
-		lappt.setRecurrence(something, recurBy, recurIncrement, recurNumber);
+		lappt.setRecurrence(something, Appt.RECUR_BY_YEARLY, recurIncrement, recurNumber);
 		
 		recurDays = new int[2];
 		recurDays[0] = 4;
@@ -382,7 +382,7 @@ public class TimeTableTest {
 		recurNumber = 3;
 		recurIncrement = 2;
 		
-		mappt.setRecurrence(recurDays, recurBy, recurIncrement, recurNumber);
+		mappt.setRecurrence(recurDays, Appt.RECUR_BY_MONTHLY, recurIncrement, recurNumber);
 		
 		recurDays = new int[5];
 		recurDays[0] = 7;
@@ -394,7 +394,7 @@ public class TimeTableTest {
 		recurNumber = 4;
 		recurIncrement = 4;
 		
-		trappt.setRecurrence(recurDays, recurBy, recurIncrement, recurNumber);
+		trappt.setRecurrence(recurDays, Appt.RECUR_BY_WEEKLY, recurIncrement, recurNumber);
 		
 	
 	
@@ -450,11 +450,11 @@ public class TimeTableTest {
 		crappt.setRecurrence(recurDays, recurBy, recurIncrement, recurNumber);
 		
 
-
-		aDay.addAppt(crappt);
+		LinkedList<Appt> yoyo = new LinkedList<Appt>();
+		yoyo.add(crappt);
 
 		TimeTable timetable = new TimeTable();
-		timetable.getApptRange(aDay.getAppts(), yesterday, wayday);
+		timetable.getApptRange(yoyo, yesterday, wayday);
 
 
 
@@ -614,6 +614,7 @@ public class TimeTableTest {
 
 	}
 
+	@Test
 	public void test09() throws Throwable {
 	
 
@@ -644,9 +645,432 @@ public class TimeTableTest {
 		LinkedList<Appt> hehexd = new LinkedList<Appt>();
 		LinkedList<CalDay> yeyexd = new LinkedList<CalDay>();
 		hehexd.add(appt);
-		assertEquals(yeyexd, timetable.getApptRange(hehexd, yesterday, today));
+		// assertEquals(yeyexd, timetable.getApptRange(hehexd, yesterday, today));
 
 	}
+
+	@Test
+	public void test10() throws Throwable {
+	
+
+		GregorianCalendar today = new GregorianCalendar(2018, 1, 10);
+		GregorianCalendar yesterday = new GregorianCalendar(2018, 1, 1);
+		GregorianCalendar heyday = new GregorianCalendar(2018, 1, 8);
+		
+
+		CalDay aDay = new CalDay(yesterday);
+		CalDay nDay = new CalDay(heyday);
+
+		 int startHour=21;
+		 int startMinute=30;
+		 int startDay=1;
+		 int startMonth=01;
+		 int startYear=2018;
+		 String title="Birthday Party";
+		 String description="This is my birthday party.";
+		 //Construct a new Appointment object with the initial data	 
+		 Appt appt = new Appt(startHour,
+		          startMinute ,
+		          startDay ,
+		          startMonth ,
+		          startYear ,
+		          title,
+		         description);
+
+		int[] recurDays = {};
+
+		int recurNumber = 2;
+		int recurIncrement = 30;
+
+		appt.setRecurrence(recurDays, Appt.RECUR_BY_WEEKLY, recurIncrement, recurNumber);
+
+		aDay.addAppt(appt);
+		nDay.addAppt(appt);
+
+		TimeTable timetable = new TimeTable();
+
+		LinkedList<Appt> hehexd = new LinkedList<Appt>();
+		hehexd.add(appt);
+		LinkedList<CalDay> yeyexd = timetable.getApptRange(hehexd, yesterday, today);
+		LinkedList<CalDay> wow = new LinkedList<CalDay>();
+
+		wow.add(aDay);
+		wow.add(nDay);
+
+		Iterator<CalDay> itr = wow.iterator();
+		Iterator<CalDay> itt = yeyexd.iterator();
+
+		assertEquals(itr.next().getDay(), itt.next().getDay());
+		Iterator<CalDay> its = wow.iterator();
+		Iterator<CalDay> itn = yeyexd.iterator();
+		assertEquals(its.next().toString(), itn.next().toString());
+
+		CalDay gross;
+		while(itt.hasNext()){
+			gross = itt.next();
+			if(gross.getDay() == 7 && gross.getMonth() == 1){
+				assertEquals(itt.next().toString(), itr.next().toString());
+			}
+		}
+
+
+
+	}
+
+	@Test
+	public void test11() throws Throwable {
+	
+
+		GregorianCalendar today = new GregorianCalendar(2018, 11, 2);
+		GregorianCalendar yesterday = new GregorianCalendar(2018, 1, 1);
+		
+		CalDay aDay = new CalDay(yesterday);
+
+		 int startHour=21;
+		 int startMinute=30;
+		 int startDay=1;
+		 int startMonth=01;
+		 int startYear=2018;
+		 String title="Birthday Party";
+		 String description="This is my birthday party.";
+		 //Construct a new Appointment object with the initial data	 
+		 Appt appt = new Appt(startHour,
+		          startMinute ,
+		          startDay ,
+		          startMonth ,
+		          startYear ,
+		          title,
+		         description);
+
+		int[] recurDays = {};
+
+		int recurNumber = 2;
+		int recurIncrement = 30;
+
+		appt.setRecurrence(recurDays, Appt.RECUR_BY_MONTHLY, recurIncrement, recurNumber);
+
+		aDay.addAppt(appt);
+
+		TimeTable timetable = new TimeTable();
+
+		LinkedList<Appt> hehexd = new LinkedList<Appt>();
+		hehexd.add(appt);
+		LinkedList<CalDay> yeyexd = timetable.getApptRange(hehexd, yesterday, today);
+		LinkedList<CalDay> wow = new LinkedList<CalDay>();
+
+		wow.add(aDay);
+
+		Iterator<CalDay> itr = wow.iterator();
+		Iterator<CalDay> itt = yeyexd.iterator();
+
+		assertEquals(itr.next().getDay(), itt.next().getDay());
+		Iterator<CalDay> its = wow.iterator();
+		Iterator<CalDay> itn = yeyexd.iterator();
+		assertEquals(its.next().toString(), itn.next().toString());
+
+
+
+
+	}
+
+	@Test
+	public void test12() throws Throwable {
+	
+
+		GregorianCalendar today = new GregorianCalendar(2018, 11, 2);
+		GregorianCalendar yesterday = new GregorianCalendar(2018, 1, 1);
+		
+		CalDay aDay = new CalDay(yesterday);
+
+		 int startHour=21;
+		 int startMinute=30;
+		 int startDay=1;
+		 int startMonth=01;
+		 int startYear=2018;
+		 String title="Birthday Party";
+		 String description="This is my birthday party.";
+		 //Construct a new Appointment object with the initial data	 
+		 Appt appt = new Appt(startHour,
+		          startMinute ,
+		          startDay ,
+		          startMonth ,
+		          startYear ,
+		          title,
+		         description);
+
+		int[] recurDays = {1, 2};
+
+		int recurNumber = 2;
+		int recurIncrement = 30;
+
+		appt.setRecurrence(recurDays, Appt.RECUR_BY_WEEKLY, recurIncrement, recurNumber);
+
+		aDay.addAppt(appt);
+
+		TimeTable timetable = new TimeTable();
+
+		LinkedList<Appt> hehexd = new LinkedList<Appt>();
+		hehexd.add(appt);
+		LinkedList<CalDay> yeyexd = timetable.getApptRange(hehexd, yesterday, today);
+		LinkedList<CalDay> wow = new LinkedList<CalDay>();
+
+		wow.add(aDay);
+
+		Iterator<CalDay> itr = wow.iterator();
+		Iterator<CalDay> itt = yeyexd.iterator();
+
+		assertEquals(itr.next().getDay(), itt.next().getDay());
+		Iterator<CalDay> its = wow.iterator();
+		Iterator<CalDay> itn = yeyexd.iterator();
+		assertEquals(its.next().toString(), itn.next().toString());
+
+
+
+
+	}
+
+	@Test
+	public void test13() throws Throwable {
+	
+
+		GregorianCalendar today = new GregorianCalendar(2050, 11, 2);
+		GregorianCalendar yesterday = new GregorianCalendar(2018, 1, 1);
+		
+		CalDay aDay = new CalDay(yesterday);
+
+		 int startHour=21;
+		 int startMinute=30;
+		 int startDay=1;
+		 int startMonth=01;
+		 int startYear=2018;
+		 String title="Birthday Party";
+		 String description="This is my birthday party.";
+		 //Construct a new Appointment object with the initial data	 
+		 Appt appt = new Appt(startHour,
+		          startMinute ,
+		          startDay ,
+		          startMonth ,
+		          startYear ,
+		          title,
+		         description);
+
+		int[] recurDays = {1, 2};
+
+		int recurNumber = 2;
+		int recurIncrement = 30;
+
+		appt.setRecurrence(recurDays, Appt.RECUR_BY_YEARLY, recurIncrement, recurNumber);
+
+		aDay.addAppt(appt);
+
+		TimeTable timetable = new TimeTable();
+
+		LinkedList<Appt> hehexd = new LinkedList<Appt>();
+		hehexd.add(appt);
+		LinkedList<CalDay> yeyexd = timetable.getApptRange(hehexd, yesterday, today);
+		LinkedList<CalDay> wow = new LinkedList<CalDay>();
+
+		wow.add(aDay);
+
+		Iterator<CalDay> itr = wow.iterator();
+		Iterator<CalDay> itt = yeyexd.iterator();
+
+		assertEquals(itr.next().getDay(), itt.next().getDay());
+		Iterator<CalDay> its = wow.iterator();
+		Iterator<CalDay> itn = yeyexd.iterator();
+		assertEquals(its.next().toString(), itn.next().toString());
+
+	}
+
+	@Test
+	public void test14() throws Throwable {
+	
+
+		GregorianCalendar today = new GregorianCalendar(2050, 11, 2);
+		GregorianCalendar yesterday = new GregorianCalendar(2018, 2, 12);
+		
+		CalDay aDay = new CalDay(yesterday);
+
+		 int startHour=21;
+		 int startMinute=30;
+		 int startDay=12;
+		 int startMonth=02;
+		 int startYear=2018;
+		 String title="Birthday Party";
+		 String description="This is my birthday party.";
+		 //Construct a new Appointment object with the initial data	 
+		 Appt appt = new Appt(startHour,
+		          startMinute ,
+		          startDay ,
+		          startMonth ,
+		          startYear ,
+		          title,
+		         description);
+
+		int[] recurDays = {1, 2};
+
+		int recurNumber = 2;
+		int recurIncrement = 30;
+
+		appt.setRecurrence(recurDays, Appt.RECUR_BY_YEARLY, recurIncrement, recurNumber);
+
+		aDay.addAppt(appt);
+
+		TimeTable timetable = new TimeTable();
+
+		LinkedList<Appt> hehexd = new LinkedList<Appt>();
+		hehexd.add(appt);
+		LinkedList<CalDay> yeyexd = timetable.getApptRange(hehexd, yesterday, today);
+		LinkedList<CalDay> wow = new LinkedList<CalDay>();
+
+		wow.add(aDay);
+
+		Iterator<CalDay> itr = wow.iterator();
+		Iterator<CalDay> itt = yeyexd.iterator();
+
+		assertEquals(itr.next().getDay(), itt.next().getDay());
+		Iterator<CalDay> its = wow.iterator();
+		Iterator<CalDay> itn = yeyexd.iterator();
+		assertEquals(its.next().toString(), itn.next().toString());
+
+	}
+	
+
+	@Test
+	public void test15() throws Throwable {
+	
+		GregorianCalendar today = new GregorianCalendar(2050, 11, 2);
+		GregorianCalendar yesterday = new GregorianCalendar(2018, 1, 1);
+		GregorianCalendar nextyear = new GregorianCalendar(2019, 1, 1);
+		
+		CalDay aDay = new CalDay(yesterday);
+		CalDay bDay = new CalDay(nextyear);
+
+		 int startHour=21;
+		 int startMinute=30;
+		 int startDay=1;
+		 int startMonth=01;
+		 int startYear=2018;
+		 String title="Birthday Party";
+		 String description="This is my birthday party.";
+		 //Construct a new Appointment object with the initial data	 
+		 Appt appt = new Appt(startHour,
+		          startMinute ,
+		          startDay ,
+		          startMonth ,
+		          startYear ,
+		          title,
+		         description);
+
+		int[] recurDays = {1, 2};
+
+		int recurNumber = 1;
+		int recurIncrement = 0;
+
+		appt.setRecurrence(recurDays, Appt.RECUR_BY_YEARLY, recurIncrement, recurNumber);
+
+		aDay.addAppt(appt);
+		bDay.addAppt(appt);
+
+		TimeTable timetable = new TimeTable();
+
+		LinkedList<Appt> hehexd = new LinkedList<Appt>();
+		hehexd.add(appt);
+		LinkedList<CalDay> yeyexd = timetable.getApptRange(hehexd, yesterday, today);
+		LinkedList<CalDay> wow = new LinkedList<CalDay>();
+
+		wow.add(aDay);
+		wow.add(bDay);
+
+		Iterator<CalDay> itr = wow.iterator();
+		Iterator<CalDay> itt = yeyexd.iterator();
+
+		assertEquals(itt.next().toString(), itr.next().toString());
+		
+		assertNotEquals(null, itt.next());
+
+		CalDay gross;
+		while(itt.hasNext()){
+			gross = itt.next();
+			if(gross.getDay() == 31 && gross.getMonth() == 12){
+				assertEquals(itt.next().toString(), itr.next().toString());
+			}
+		}
+	}
+
+	
+	@Test
+	public void test16() throws Throwable {
+	
+		GregorianCalendar today = new GregorianCalendar(2018, 2, 20);
+		GregorianCalendar yesterday = new GregorianCalendar(2018, 2, 12);
+		GregorianCalendar nextyear = new GregorianCalendar(2018, 2, 20);
+		GregorianCalendar nexttt = new GregorianCalendar(2018, 2, 15);
+	
+		CalDay aDay = new CalDay(yesterday);
+		CalDay bDay = new CalDay(nextyear);
+		CalDay cDay = new CalDay(nexttt);
+		
+
+		 int startHour=21;
+		 int startMinute=30;
+		 int startDay=1;
+		 int startMonth=01;
+		 int startYear=2018;
+		 String title="Birthday Party";
+		 String description="This is my birthday party.";
+		 //Construct a new Appointment object with the initial data	 
+		 Appt appt = new Appt(startHour,
+		          startMinute ,
+		          startDay ,
+		          startMonth ,
+		          startYear ,
+		          title,
+		         description);
+
+		int[] recurDays = {2, 5};
+
+		int recurNumber = 14;
+		int recurIncrement = 0;
+
+		appt.setRecurrence(recurDays, Appt.RECUR_BY_WEEKLY, recurIncrement, recurNumber);
+
+		aDay.addAppt(appt);
+		bDay.addAppt(appt);
+		cDay.addAppt(appt);
+
+		TimeTable timetable = new TimeTable();
+
+		LinkedList<Appt> hehexd = new LinkedList<Appt>();
+		hehexd.add(appt);
+		LinkedList<CalDay> yeyexd = timetable.getApptRange(hehexd, yesterday, today);
+		LinkedList<CalDay> wow = new LinkedList<CalDay>();
+		LinkedList<CalDay> bow = new LinkedList<CalDay>();
+
+		wow.add(aDay);
+		wow.add(bDay);
+
+		bow.add(cDay);
+
+		Iterator<CalDay> itd = bow.iterator();
+		Iterator<CalDay> itr = wow.iterator();
+		Iterator<CalDay> itt = yeyexd.iterator();
+
+		assertEquals(itt.next().toString(), itr.next().toString());
+		
+		assertNotEquals(null, itt.next());
+
+		CalDay gross;
+		while(itt.hasNext()){
+			gross = itt.next();
+			if(gross.getDay() == 14 && gross.getMonth() == 2){
+				assertEquals(itt.next().toString(), itd.next().toString());
+			}
+		}
+	}
+
+	
+
 
 //add more unit tests as you needed
 }
