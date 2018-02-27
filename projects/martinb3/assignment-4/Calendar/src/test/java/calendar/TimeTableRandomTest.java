@@ -63,6 +63,13 @@ public class TimeTableRandomTest {
 				 String title="Birthday Party";
 				 String description="This is my birthday party.";
 				 //Construct a new Appointment object with the initial data	 
+				 Appt cappt = new Appt(startHour,
+				          startMinute ,
+				          startDay ,
+				          startMonth ,
+				          startYear ,
+				          title,
+				         description);
 				 Appt appt = new Appt(startHour,
 				          startMinute ,
 				          startDay ,
@@ -74,18 +81,40 @@ public class TimeTableRandomTest {
 			for (int i = 0; i < NUM_TESTS; i++) {
 					String methodName = TimeTableRandomTest.RandomSelectMethod(random);
 					   if (methodName.equals("deleteAppt")){
-		
+						LinkedList<Appt> huh = new LinkedList<Appt>();
+						for(int mm = 0; mm < 10; mm++){
+				 			startHour=ValuesGenerator.getRandomIntBetween(random, -1, 25);
+				 			startMinute=ValuesGenerator.getRandomIntBetween(random, -1, 61);
+				 			startDay=ValuesGenerator.getRandomIntBetween(random, -1, 32);
+				 			startMonth=ValuesGenerator.getRandomIntBetween(random, -1, 12);
+				 			startYear=ValuesGenerator.getRandomIntBetween(random, 2000, 2030);
+
+							appt.setStartHour(startHour);
+							appt.setStartMinute(startMinute);
+							appt.setStartDay(startDay);
+							appt.setStartMonth(startMonth);
+							appt.setStartYear(startYear);
 
 
+							huh.add(appt);
+							}
+							TimeTable table = new TimeTable();
+							
+				 			int doy=ValuesGenerator.getRandomIntBetween(random, 1, 11);
+							if(doy > 9){
+								table.deleteAppt(null, null);
+								table.deleteAppt(huh, null);
+								Appt tempappt = huh.get(3);
+								table.deleteAppt(null, tempappt);
+								table.deleteAppt(null, cappt);
 
+							}
+							else{
+								Appt tempappt = huh.get(doy);
+								table.deleteAppt(huh, tempappt);
+							}
 
-
-
-
-
-
-
-						}
+						}				
 					   else if (methodName.equals("getApptRange")){
 						LinkedList<Appt> huh = new LinkedList<Appt>();
 						for(int mm = 0; mm < 10; mm++){
