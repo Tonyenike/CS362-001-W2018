@@ -4,6 +4,10 @@ package finalprojectB;
 
 import junit.framework.TestCase;
 
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
 //You can use this as a skeleton for your 3 different test approach
 //It is an optional to use this file, you can generate your own test file(s) to test the target function!
 // Again, it is up to you to use this file or not!
