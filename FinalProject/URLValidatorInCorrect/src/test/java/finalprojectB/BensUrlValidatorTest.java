@@ -25,6 +25,12 @@ public class UrlValidatorTest extends TestCase {
    {
 //You can use this function to implement your manual testing	   
 	   
+	   UrlValidator supp = new UrlValidator();
+	   supp.isValid(); // should return false
+	   supp.isValidScheme(null); // should return false
+	   
+	   
+	   
    }
    
    
