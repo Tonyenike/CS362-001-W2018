@@ -11,10 +11,10 @@ import junit.framework.TestCase;
 
 
 
-public class UrlValidatorTest extends TestCase {
+public class MattsUrlValidatorTest extends TestCase {
 
 
-   public UrlValidatorTest(String testName) {
+   public MattsUrlValidatorTest(String testName) {
       super(testName);
    }
 
@@ -22,8 +22,10 @@ public class UrlValidatorTest extends TestCase {
    
    public void testManualTest()
    {
-	//new comment
-//You can use this function to implement your manual testing	   
+	//You can use this function to implement your manual testing	   
+	UrlValidator urlVal = new UrlValidator(null);
+	String test = "http://www.google.com";
+	assertTrue(urlVal.isValid(test));
 	   
    }
    
@@ -35,14 +37,14 @@ public class UrlValidatorTest extends TestCase {
    }
    
    public void testYourSecondPartition(){
-		 //You can use this function to implement your Second Partition testing	   
+	 //You can use this function to implement your Second Partition testing	   
 
    }
-   //You need to create more test cases for your Partitions if you need to 
+	 //You need to create more test cases for your Partitions if you need to 
    
    public void testIsValid()
    {
-	   //You can use this function for programming based testing
+	 //You can use this function for programming based testing
 
    }
    
