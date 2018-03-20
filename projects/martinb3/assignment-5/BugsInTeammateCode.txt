@@ -1,0 +1,30 @@
+Bugs found:
+
+1.
+In CalDay.java
+In method CalDay() ((The default constructor))
+
+Line 43
+    valid = true;
+should be
+    valid = false;
+
+Code was detected by CalDayTest.java, assertion on line 22, where it would expect the default CalDay would not be valid because a day was not given, but it actually is valid (due to the bug).
+
+
+
+
+2.
+In Appt.java
+In method isValid()
+
+Line 113
+        int NumDaysInMonth= CalendarUtil.NumDaysInMonth(startYear,startMonth);
+should be
+        int NumDaysInMonth= CalendarUtil.NumDaysInMonth(startYear,startMonth - 1);
+
+Code was detected by ApptRandomTest.java, line 76 when a faulty Appt was created which generated a utility error from the Util file (CalUtil)
+
+When a new Appt() was created, and the upper-bound testing of the month (when the month was set to 12), or was set to December, an error was produced. I found that the error was due to the fact that my partner incremented the month when making a system call to the calendar utility, which would result in an error when December was checked, and throw off all the other days of the month.
+
+This function is inside the isValid function inside the Appt.java file. If you can recall, the CalendarUtil function accepts only input from 0-11.
